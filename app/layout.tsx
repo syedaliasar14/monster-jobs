@@ -21,7 +21,9 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <ConvexClientProvider>
-            {children}
+            <main className="flex min-h-screen flex-col items-center justify-center p-24">
+              {children}
+            </main>
           </ConvexClientProvider>
         </body>
       </html>

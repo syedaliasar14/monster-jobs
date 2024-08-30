@@ -3,23 +3,28 @@
 import { api } from "@/convex/_generated/api";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
+import { useRouter } from "next/navigation";
 
 export default function WelcomePage() {
-
+  const router = useRouter();
   const tasks = useQuery(api.tasks.get)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <div className="flex flex-col items-center justify-center p-24">
       <div>Welcome to</div>
       <div>Monster Jobs</div>
       <SignedIn>
-        <button>Register a Monster Employee</button>
-        <button>View all Employees</button>
+        <button
+          onClick={() => router.push('register')}
+          >Register a Monster Employee</button>
+        <button
+          onClick={() => router.push('employeelist')}
+          >View all Employees</button>
         <UserButton />
       </SignedIn>
       <SignedOut>
         <SignInButton />
       </SignedOut>
-    </main>
+    </div>
   );
 }
