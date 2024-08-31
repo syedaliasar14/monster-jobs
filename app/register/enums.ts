@@ -31,19 +31,24 @@ export const numberOfEyesOptions = [
   "100",
 ];
 
-export const armsOrWingsOptions = [
-  "Arms",
-  "Wings",
+export const numberOfArmsOptions = [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "10",
+  "100",
 ];
 
-export const legsOrTentaclesOptions = [
-  "Legs",
-  "Tentacles",
-];
-
-export const tailOptions = [
-  "Yes",
-  "No",
+export const numberOfLegsOptions = [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "10",
+  "100",
 ];
 
 export const skinTextureOptions = [
@@ -55,7 +60,10 @@ export const skinTextureOptions = [
   "Soft and Squishy",
 ];
 
-export const fangsOptions = [
-  "Yes",
-  "No",
+export const featuresOptions = [
+  { id: "wings", label: "Wings" },
+  { id: "fangs", label: "Fangs" },
+  { id: "tentacles", label: "Tentacles" },
+  { id: "tail", label: "Tail" },
+  { id: "horns", label: "Horns" },
 ];

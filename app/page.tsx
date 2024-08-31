@@ -1,21 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
 import { SignedIn, SignedOut, SignIn, SignInButton, UserButton } from "@clerk/nextjs";
-import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 import MySignInButton from "./components/MySignInButton";
 
 export default function WelcomePage() {
   const router = useRouter();
-  const tasks = useQuery(api.tasks.get)
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <div className="text-5xl font-bold text-primary-foreground">Welcome to</div>
       <div className="text-6xl font-bold text-primary-foreground pt-2 pb-5">Monster Jobs</div>
-      <div className="text-2xl text-primary-foreground pb-2">Find the perfect career opportunities for our new monster friends.</div>
+      <div className="text-xl text-primary-foreground text-center pb-2">Find the perfect career opportunities for our new monster friends.</div>
       <SignedIn>
         <Button
           onClick={() => router.push('register')}

@@ -7,10 +7,13 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useRouter } from "next/navigation";
 import { formSchema, onSubmit } from "./utils";
-import { hairColorOptions, skinColorOptions, numberOfEyesOptions, armsOrWingsOptions, legsOrTentaclesOptions, tailOptions, skinTextureOptions, fangsOptions } from "./enums";
+import { hairColorOptions, skinColorOptions, numberOfEyesOptions, numberOfArmsOptions, numberOfLegsOptions, skinTextureOptions, featuresOptions } from "./enums";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function Register() {
   const router = useRouter();
@@ -18,12 +21,11 @@ export default function Register() {
     { name: 'hairColor', label: 'Hair Color', options: hairColorOptions },
     { name: 'skinColor', label: 'Skin Color', options: skinColorOptions },
     { name: 'numberOfEyes', label: 'Number of Eyes', options: numberOfEyesOptions },
-    { name: 'armsOrWings', label: 'Arms or Wings', options: armsOrWingsOptions },
-    { name: 'legsOrTentacles', label: 'Legs or Tentacles', options: legsOrTentaclesOptions },
-    { name: 'tail', label: 'Tail', options: tailOptions },
+    { name: 'numberOfArms', label: 'Number of Arms', options: numberOfArmsOptions },
+    { name: 'numberOfLegs', label: 'Number of Legs', options: numberOfLegsOptions },
     { name: 'skinTexture', label: 'Skin Texture', options: skinTextureOptions },
-    { name: 'fangs', label: 'Fangs', options: fangsOptions },
   ] as const;
+  const createEmployee = useMutation(api.employees.createEmployee)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,11 +34,10 @@ export default function Register() {
       hairColor: hairColorOptions[0],
       skinColor: skinColorOptions[0],
       numberOfEyes: numberOfEyesOptions[0],
-      armsOrWings: armsOrWingsOptions[0],
-      legsOrTentacles: legsOrTentaclesOptions[0],
-      tail: tailOptions[0],
+      numberOfArms: numberOfArmsOptions[0],
+      numberOfLegs: numberOfLegsOptions[0],
       skinTexture: skinTextureOptions[0],
-      fangs: fangsOptions[0],
+      features: [],
     },
   })
 
@@ -44,7 +45,7 @@ export default function Register() {
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary to-secondary p-24">
       <div className="text-3xl font-bold p-4 text-primary-foreground">Register a Monster Employee</div>
       <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8 p-10">
+      <form onSubmit={form.handleSubmit((v) => onSubmit(v, router, createEmployee))} className="flex flex-col gap-8 p-10">
         <FormField
           control={form.control} name="name" render={({ field }) => (
             <FormItem>
@@ -73,9 +74,34 @@ export default function Register() {
             </FormItem>
           )} />
         ))}
-        <Button type="submit"
-          onClick={() => router.push('/register/jobsearch')}
-          >Search For Jobs</Button>
+        <FormField
+          control={form.control} name="features" render={() => (
+            <FormItem>
+              <FormLabel>Features</FormLabel>
+              <div className="grid grid-cols-3 gap-4">
+                {featuresOptions.map((item) => (
+                  <FormField key={item.id} control={form.control} name="features" render={({ field }) => {
+                    return (
+                      <FormItem key={item.id}
+                        className="flex flex-row items-start space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(field.value?.filter((value) => value !== item.id))
+                            }}/>
+                        </FormControl>
+                        <div>{item.label}</div>
+                      </FormItem>
+                    )}}
+                  />))}
+                </div>
+              <FormMessage />
+            </FormItem>
+          )}/>
+        <Button type="submit">Search For Jobs</Button>
       </form>
       </Form>
     </main>

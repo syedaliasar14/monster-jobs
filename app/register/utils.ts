@@ -1,19 +1,19 @@
 import { z } from "zod";
 
 export const formSchema = z.object({
-  name: z.string(),
+  name: z.string().min(1),
   hairColor: z.string(),
   skinColor: z.string(),
   numberOfEyes: z.string(),
-  armsOrWings: z.string(),
-  legsOrTentacles: z.string(),
-  tail: z.string(),
+  numberOfArms: z.string(),
+  numberOfLegs: z.string(),
   skinTexture: z.string(),
-  fangs: z.string(),
+  features: z.array(z.string()),
 })
 
-export function onSubmit(values: z.infer<typeof formSchema>) {
-  // Do something with the form values.
-  // ✅ This will be type-safe and validated.
+export async function onSubmit(values: z.infer<typeof formSchema>, router: any, createEmployee: Function) {
   console.log(values)
+  const employeeId = await createEmployee(values)
+  console.log(employeeId)
+  router.push('/register/jobsearch?employeeId=' + employeeId)
 }
