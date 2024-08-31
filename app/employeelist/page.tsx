@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function EmployeeList() {
   const router = useRouter();
-  const employees = useQuery(api.employees.get)
+  const employees = useQuery(api.employees.getAllEmployees)
 
   console.log(employees)
   
@@ -24,8 +24,9 @@ export default function EmployeeList() {
                 width={64} height={64} className="w-12 h-12 rounded-full"/>
               <div className="pl-4">
                 <div className="font-bold">{employee.name ? employee.name : "(No name)"}</div>
-                <div>Hair color: {employee.hairColor}</div>
-                <div>Features: {employee.features?.join(", ")}</div>
+                <span className="inline-flex items-center px-3 my-1 rounded-full font-medium bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center w-max">
+                  {employee?.job}
+                </span>
               </div>
             </div>
           </li>

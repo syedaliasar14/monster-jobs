@@ -1,24 +1,29 @@
 export const hairColorOptions = [
-  "Blue",
-  "Green",
-  "Black",
-  "Brown",
   "Red",
+  "Orange",
+  "Yellow",
+  "Green",
+  "Blue",
+  "Purple",
   "Pink",
+  "Brown",
+  "Black",
   "White",
   "Gray",
 ];
 
 export const skinColorOptions = [
-  "Green",
-  "Yellow",
-  "Brown",
   "Red",
   "Orange",
-  "Purple",
+  "Yellow",
+  "Green",
   "Blue",
-  "Indigo",
-  "Violet",
+  "Purple",
+  "Pink",
+  "Brown",
+  "Black",
+  "White",
+  "Gray",
 ];
 
 export const numberOfEyesOptions = [
@@ -66,4 +71,9 @@ export const featuresOptions = [
   { id: "tentacles", label: "Tentacles" },
   { id: "tail", label: "Tail" },
   { id: "horns", label: "Horns" },
+  { id: "claws", label: "Claws" },
+  { id: "shell", label: "Shell" },
+  { id: "whiskers", label: "Whiskers" },
+  { id: "glow", label: "Glow" },
+  { id: "venom", label: "Venom" },
 ];

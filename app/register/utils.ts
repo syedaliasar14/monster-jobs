@@ -14,6 +14,5 @@ export const formSchema = z.object({
 export async function onSubmit(values: z.infer<typeof formSchema>, router: any, createEmployee: Function) {
   console.log(values)
   const employeeId = await createEmployee(values)
-  console.log(employeeId)
   router.push('/register/jobsearch?employeeId=' + employeeId)
 }

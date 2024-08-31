@@ -24,10 +24,17 @@ function convertZodToConvex(zodSchema: ZodObject<any>): { [key: string]: any } {
   return convexSchema;
 }
 
-export const get = query({
+export const getAllEmployees = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("employees").order("desc").collect();
+  },
+});
+
+export const getEmployeeById = query({
+  args: { employeeId: v.id("employees") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.employeeId)
   },
 });
 
@@ -36,5 +43,17 @@ export const createEmployee = mutation({
   handler: async (ctx, args) => {
     const employeeId = await ctx.db.insert("employees", args);
     return employeeId;
+  },
+});
+
+export const updateEmployeeJob = mutation({
+  args: {
+    employeeId: v.id("employees"),
+    job: v.string(),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.patch(args.employeeId, {
+      job: args.job,
+    });
   },
 });

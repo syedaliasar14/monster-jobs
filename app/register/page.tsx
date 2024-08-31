@@ -18,12 +18,12 @@ import { api } from "@/convex/_generated/api";
 export default function Register() {
   const router = useRouter();
   const radioFormFields = [
-    { name: 'hairColor', label: 'Hair Color', options: hairColorOptions },
-    { name: 'skinColor', label: 'Skin Color', options: skinColorOptions },
-    { name: 'numberOfEyes', label: 'Number of Eyes', options: numberOfEyesOptions },
-    { name: 'numberOfArms', label: 'Number of Arms', options: numberOfArmsOptions },
-    { name: 'numberOfLegs', label: 'Number of Legs', options: numberOfLegsOptions },
-    { name: 'skinTexture', label: 'Skin Texture', options: skinTextureOptions },
+    { name: 'hairColor', label: 'Hair Color 💈', options: hairColorOptions },
+    { name: 'skinColor', label: 'Skin Color 🎨', options: skinColorOptions },
+    { name: 'numberOfEyes', label: 'Number of Eyes 👁️', options: numberOfEyesOptions },
+    { name: 'numberOfArms', label: 'Number of Arms 💪', options: numberOfArmsOptions },
+    { name: 'numberOfLegs', label: 'Number of Legs 🦵', options: numberOfLegsOptions },
+    { name: 'skinTexture', label: 'Skin Texture 🖐️', options: skinTextureOptions },
   ] as const;
   const createEmployee = useMutation(api.employees.createEmployee)
 
@@ -43,13 +43,14 @@ export default function Register() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary to-secondary p-24">
-      <div className="text-3xl font-bold p-4 text-primary-foreground">Register a Monster Employee</div>
+      <div className="text-5xl font-bold p-4 text-primary-foreground">Register a Monster Employee</div>
+      <div className="text-xl font-bold">Fill out the fields to see what jobs we can find</div>
       <Form {...form}>
       <form onSubmit={form.handleSubmit((v) => onSubmit(v, router, createEmployee))} className="flex flex-col gap-8 p-10">
         <FormField
           control={form.control} name="name" render={({ field }) => (
             <FormItem>
-              <FormLabel>Name of the Monster</FormLabel>
+              <FormLabel>Name ✏️</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -66,7 +67,7 @@ export default function Register() {
                   {myField.options.map((option) => (
                     <div className="flex items-center space-x-2" key={option}>
                       <RadioGroupItem value={option} id={option} />
-                      <Label htmlFor={option}>{option}</Label>
+                      <Label className="font-medium text-md" htmlFor={option}>{option}</Label>
                     </div>
                   ))}
                 </RadioGroup>
@@ -77,13 +78,13 @@ export default function Register() {
         <FormField
           control={form.control} name="features" render={() => (
             <FormItem>
-              <FormLabel>Features</FormLabel>
+              <FormLabel>Features 🪽</FormLabel>
               <div className="grid grid-cols-3 gap-4">
                 {featuresOptions.map((item) => (
                   <FormField key={item.id} control={form.control} name="features" render={({ field }) => {
                     return (
                       <FormItem key={item.id}
-                        className="flex flex-row items-start space-x-3 space-y-0">
+                        className="flex flex-row items-start space-x-3 space-y-0 font-medium">
                         <FormControl>
                           <Checkbox
                             checked={field.value?.includes(item.id)}
@@ -101,7 +102,7 @@ export default function Register() {
               <FormMessage />
             </FormItem>
           )}/>
-        <Button type="submit">Search For Jobs</Button>
+        <Button type="submit">Search For Jobs 🔎</Button>
       </form>
       </Form>
     </main>
