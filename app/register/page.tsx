@@ -41,8 +41,8 @@ export default function Register() {
   })
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="text-3xl p-4">Register a Monster Employee</div>
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary to-secondary p-24">
+      <div className="text-3xl font-bold p-4 text-primary-foreground">Register a Monster Employee</div>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8 p-10">
         <FormField

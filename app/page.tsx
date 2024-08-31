@@ -12,20 +12,20 @@ export default function WelcomePage() {
   const tasks = useQuery(api.tasks.get)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary to-secondary p-24">
-      <div className="text-5xl font-bold tracking-wide text-primary-foreground">Welcome to</div>
-      <div className="text-6xl font-bold tracking-wide text-primary-foreground pt-2 pb-5">Monster Jobs</div>
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <div className="text-5xl font-bold text-primary-foreground">Welcome to</div>
+      <div className="text-6xl font-bold text-primary-foreground pt-2 pb-5">Monster Jobs</div>
       <div className="text-2xl text-primary-foreground pb-2">Find the perfect career opportunities for our new monster friends.</div>
       <SignedIn>
         <Button
           onClick={() => router.push('register')}
-          className="mt-6"
+          className="mt-6 text-lg rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-4 py-2 shadow-lg shadow-yellow-500/50 ring-2 ring-yellow-500 ring-offset-2 ring-offset-background focus:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Register a Monster Employee
         </Button>
         <Button
           onClick={() => router.push('employeelist')}
-          className="mt-6 text-secondary-foreground bg-secondary hover:bg-secondary/80"
+          className="mt-6"
         >
           View all Employees
         </Button>

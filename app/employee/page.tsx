@@ -7,8 +7,8 @@ export default function Employee() {
   const router = useRouter();
   
   return (
-    <main className="flex flex-col min-h-screen items-center justify-center p-4 space-y-4 bg-gray-900">
-      <div className="bg-white rounded-lg p-4 shadow-md w-full max-w-md">
+    <main className="flex flex-col min-h-screen items-center justify-center p-4 space-y-4">
+      <div className="bg-white rounded-lg p-4 shadow-md w-full max-w-md text-gray-800">
         <div className="flex items-center space-x-4">
           <img
             src="https://picsum.photos/200"
@@ -26,15 +26,13 @@ export default function Employee() {
           Donec non nisl sit amet nisl lobortis malesuada.
         </p>
       </div>
-      <div className="flex space-x-2">
+      <div className="flex flex-col gap-2">
         <Button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => router.push('/employeelist')}
         >
           View All Employees
         </Button>
         <Button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => router.push('/')}
         >
           Home

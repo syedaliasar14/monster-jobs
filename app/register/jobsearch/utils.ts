@@ -22,6 +22,6 @@ const jobPool = [
 ]
 
 export function getJobsFromJobPool(): string[] {
-  const shuffled = [...jobPool].sort(() => 0.5 - Math.random());
+const shuffled = Array.from(new Set(jobPool)).sort(() => 0.5 - Math.random());
   return shuffled.slice(0, 15);
 }

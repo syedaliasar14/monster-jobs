@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 flex w-full items-center justify-between p-4">
       <button 
-        className="text-2xl font-bold tracking-wide text-primary-foreground"
+        className="text-2xl font-bold text-primary-foreground"
         onClick={() => router.push('/')}
         >Monster Jobs</button>
       <SignedIn>
