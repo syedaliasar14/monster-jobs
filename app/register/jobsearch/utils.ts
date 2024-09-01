@@ -1,27 +1,38 @@
-const jobPool = [
-  'Construction', 'Swim Teacher', 'Lawyer', 'Flight Attendant',
-  'Pirate', 'Professional Snuggler', 'Intergalactic Ambassador', 'Bubble Wrap Popping Specialist',
-  'Robot Whisperer', 'Disco Dancer', 'Time Traveler', 'Quantum Physicist',
-  'Cloud Engineer', 'Cyborg Mechanic', 'Virtual Reality Experience Designer', 'Alien Linguist',
-  'Professional Line-Stander', 'Underwater Basketweaver', 'Chicken Whisperer', 'Furry Fashion Designer',
-  'Sandcastle Architect', 'Competitive Eater', 'Professional Cuddler', 'Digital Gardener',
-  'Virtual Event Planner', 'Social Media Influencer for Pets', 'Professional Line-Dancer',
-  'Amusement Park Mechanic', 'Haunted House Scream Actor', 'Pet Food Taster',
-  'Dog Surfing Trainer', 'Professional Balloon Twister', 'Feline Fashion Model', 'Underwater Welder',
-  'Personalized Meal Planner', 'Professional Line-Stander', 'Treehouse Builder', 'Virtual Reality Game Developer',
-  'Professional Mermaid/Merman', 'Haunted House Sound Engineer', 'Fireworks Technician', 'Animal Costume Designer',
-  'Stunt Driver', 'Caramel Apple Dippers', 'Balloon Pop Musician', 'Bubble Artist',
-  'Pizza Dough Tosser', 'Pinata Maker', 'Hamster Trainer', 'Clown',
-  'Face Painter', 'Balloon Animal Twister', 'Bubble Wrap Popping Expert', 'Jump Scare Artist',
-  'Hula Hooper', 'Unicyclist', 'Juggler', 'Yo-Yoer',
-  'Skateboarder', 'BMX Rider', 'Roller Coaster Designer', 'Carousel Operator',
-  'Ferris Wheel Operator', 'Haunted House Actor', 'Scarecrow', 'Crop Duster',
-  'Crop Circle Maker', 'Cloud Sculptor', 'Fog Machine Operator', 'Bubble Machine Operator',
-  'Smoke Machine Operator', 'Strobe Light Operator', 'Laser Light Show Operator', 'Confetti Cannon Operator',
-  'Pyrotechnician', 'Fire Breather', 'Snake Milker', 'Insect Tamer', 'Animal Whisperer', 'Animal Translator'
-]
+import { generateChat } from "@/app/api/gpt/utils";
+import { zodResponseFormat } from "openai/helpers/zod";
+import { JOB_POOL } from "./const";
+import { z } from "zod";
 
 export function getJobsFromJobPool(): string[] {
-const shuffled = Array.from(new Set(jobPool)).sort(() => 0.5 - Math.random());
+  const shuffled = Array.from(new Set(JOB_POOL)).sort(() => 0.5 - Math.random());
   return shuffled.slice(0, 15);
 }
+
+export async function generateJobs(employee: any): Promise<string[]> {
+  try {
+    // Call GPT
+    const prompt = createJobSearchPrompt(employee);
+    const response_format = zodResponseFormat(JobSearchResult, "jobs")
+    const response = await generateChat(prompt, response_format);
+
+    const { jobs } = JSON.parse(response);
+    console.log(jobs);
+    return jobs;
+  } catch (error) {
+    console.error(error);
+    console.info("Failed to generate jobs from OpenAI. Fetching from job pool...");
+    return getJobsFromJobPool();
+  }
+}
+
+function createJobSearchPrompt(employee: any) {
+  const { hairColor, skinColor, numberOfEyes, numberOfArms, numberOfLegs, skinTexture, features } = employee
+  return `Generate a list of 15 potential jobs (can be fun & silly or serious) in JSON format. ` +
+    `The job search is for a monster employee with the following characteristics: ` +
+    `A monster with ${hairColor} hair, ${skinColor} skin, ${numberOfEyes} eyes, ${numberOfArms} arms, ` +
+    `${numberOfLegs} legs, ${skinTexture} skin texture, and ${features?.join(', ')}.`
+}
+
+const JobSearchResult = z.object({
+  jobs: z.array(z.string())
+})

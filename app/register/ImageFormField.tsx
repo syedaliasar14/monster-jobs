@@ -4,7 +4,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { createPrompt, generateImageUrl } from "./utils";
+import { createPrompt } from "./utils";
+import { generateImageUrl } from "../api/dalle/utils";
 
 export default function ImageFormField({ form }: any) {
   const [isGenerated, setIsGenerated] = useState(false);
