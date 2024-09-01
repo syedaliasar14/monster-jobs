@@ -30,10 +30,10 @@ export default function Employee() {
         ) : (
           <>
             <div className="flex items-center space-x-4">
-              <ProfilePic employee={employee} />
-              <div className="flex flex-col justify-center">
+              <ProfilePic employee={employee} large={true}/>
+              <div className="flex flex-col">
                 <h2 className="text-2xl font-bold">{employee?.name}</h2>
-                <span className={`inline-flex items-center px-3 my-1 rounded-full text-lg font-medium
+                <span className={`flex px-3 my-1 rounded-full text-lg font-medium
                   bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-primary-foreground`}>
                   {employee?.job}
                 </span>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { imageOptions } from "../register/enums";
 
-export default function ProfilePic({ employee }: any) {
+export default function ProfilePic({ employee, large=false }: { employee: any, large?: boolean }) {
 
   function getSrc(employee: any) {
     if (!employee?.image) {
@@ -19,8 +19,9 @@ export default function ProfilePic({ employee }: any) {
     <Image
       src={getSrc(employee)}
       alt="Profile picture" 
-      width={64} height={64}
-      className="w-12 h-12 rounded-full"
+      width={large ? 128 : 64}
+      height={large ? 128 : 64}
+      className={`${large ? "w-32 h-32" : "w-12 h-12"} rounded-full`}
     />
   )
 }
