@@ -2,19 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { createEmployeeDesc, createEmployeeDesc2 } from "./utils";
+import ProfilePic from "../components/ProfilePic";
 
 export default function Employee() {
   const router = useRouter();
   const urlParams = useSearchParams();
   const employeeId = urlParams.get('employeeId');
   const employee = useQuery(api.employees.getEmployeeById, { employeeId: employeeId as Id<"employees"> });
-  console.log(employee?.skinColor.toLowerCase());
 
   return (
     <main className="flex flex-col min-h-screen items-center justify-center p-4 space-y-4">
@@ -31,11 +30,7 @@ export default function Employee() {
         ) : (
           <>
             <div className="flex items-center space-x-4">
-              <Image
-                src={`/${employee?.image || "profilepic.png"}`}
-                alt="Profile picture" 
-                width={64} height={64}
-                className="w-12 h-12 rounded-full"/>
+              <ProfilePic employee={employee} />
               <div className="flex flex-col justify-center">
                 <h2 className="text-2xl font-bold">{employee?.name}</h2>
                 <span className={`inline-flex items-center px-3 my-1 rounded-full text-lg font-medium

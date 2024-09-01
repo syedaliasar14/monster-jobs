@@ -65,7 +65,9 @@ export default function Register() {
             <FormItem>
               <FormLabel>{myField.label}</FormLabel>
               <FormControl>
-                <RadioGroup defaultValue={myField.options[0]} className="grid grid-cols-3 gap-4">
+                <RadioGroup className="grid grid-cols-3 gap-4"
+                  defaultValue={myField.options[0]}
+                  onValueChange={field.onChange}>
                   {myField.options.map((option) => (
                     <div className="flex items-center space-x-2" key={option}>
                       <RadioGroupItem value={option} id={option} />
