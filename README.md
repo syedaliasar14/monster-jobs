@@ -1,16 +1,21 @@
-Try it out here! - https://monster-jobs-chi.vercel.app/
+# Monster Jobs: A Monster Employee Recruitment Portal
 
-This is the public GitHub repo for Monster Jobs, a monster employee recruitment portal.
-As part of the Hackathon challenge - https://www.learnwithjason.dev/blog/web-dev-challenge-hackathon-monsters
+Monster Jobs is a web application that allows users to register monsters and hire them for various jobs. This project was created as part of the [Learn with Jason Web Development Challenge](https://www.learnwithjason.dev/blog/web-dev-challenge-hackathon-monsters).
 
-Register monsters by filling out a form describing their features. Then select a job that you think is the perfect fit. Once hired, the monster employee is added to the database and you can view all the employees hired!
+## Getting Started
 
-Tech Stack
-* Clerk for authentication
-* Convex for database
-* Next.js & Typescript
-* Vercel for deployment
+- Try it out here: https://monster-jobs-chi.vercel.app/
 
-Upcoming features:
-* Use OpenAI to generate jobs based on monster features
-* Use OpenAI to generate an image of the monster and add it to the employee badge
+## Features
+
+- Register monsters by filling out a form describing their features.
+- Select a job that you think is the perfect fit.
+- Once hired, the monster employee is added to the database and you can view all the employees hired!
+
+## Tech Stack
+
+- Clerk for authentication
+- Convex for database
+- Next.js & Typescript
+- Vercel for deployment
+- OpenAI/Dall-E for AI image generation
