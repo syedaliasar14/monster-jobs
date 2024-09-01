@@ -8,7 +8,7 @@ export default function ImageFormField(form: any) {
   return (
     <FormField
       control={form.control}
-      name="selectedImage"
+      name="image"
       render={({ field }) => (
         <FormItem>
           <FormLabel>Select a Profile Picture 🖼️</FormLabel>
