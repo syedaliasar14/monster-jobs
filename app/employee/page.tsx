@@ -31,8 +31,11 @@ export default function Employee() {
         ) : (
           <>
             <div className="flex items-center space-x-4">
-              <Image src="/profilepic.png" alt="Profile picture" 
-                width={64} height={64} className="w-12 h-12 rounded-full"/>
+              <Image
+                src={`/${employee?.image || "profilepic.png"}`}
+                alt="Profile picture" 
+                width={64} height={64}
+                className="w-12 h-12 rounded-full"/>
               <div className="flex flex-col justify-center">
                 <h2 className="text-2xl font-bold">{employee?.name}</h2>
                 <span className={`inline-flex items-center px-3 my-1 rounded-full text-lg font-medium

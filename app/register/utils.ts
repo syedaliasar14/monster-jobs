@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const formSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().min(1, { message: "Name is required" }).max(100),
   hairColor: z.string(),
   skinColor: z.string(),
   numberOfEyes: z.string(),
@@ -9,6 +9,7 @@ export const formSchema = z.object({
   numberOfLegs: z.string(),
   skinTexture: z.string(),
   features: z.array(z.string()),
+  image: z.string(),
 })
 
 export async function onSubmit(values: z.infer<typeof formSchema>, router: any, createEmployee: Function) {

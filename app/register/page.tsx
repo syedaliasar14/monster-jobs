@@ -7,13 +7,14 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useRouter } from "next/navigation";
 import { formSchema, onSubmit } from "./utils";
-import { hairColorOptions, skinColorOptions, numberOfEyesOptions, numberOfArmsOptions, numberOfLegsOptions, skinTextureOptions, featuresOptions } from "./enums";
+import { hairColorOptions, skinColorOptions, numberOfEyesOptions, numberOfArmsOptions, numberOfLegsOptions, skinTextureOptions, featuresOptions, imageOptions } from "./enums";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import ImageFormField from "./ImageFormField";
 
 export default function Register() {
   const router = useRouter();
@@ -38,6 +39,7 @@ export default function Register() {
       numberOfLegs: numberOfLegsOptions[0],
       skinTexture: skinTextureOptions[0],
       features: [],
+      image: imageOptions[0],
     },
   })
 
@@ -102,6 +104,7 @@ export default function Register() {
               <FormMessage />
             </FormItem>
           )}/>
+          <ImageFormField form={form}/>
         <Button type="submit">Search For Jobs 🔎</Button>
       </form>
       </Form>

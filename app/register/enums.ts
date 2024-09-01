@@ -77,3 +77,10 @@ export const featuresOptions = [
   { id: "glow", label: "Glow" },
   { id: "venom", label: "Venom" },
 ];
+
+export const imageOptions = [
+  "profilepic.png",
+  "profilepic2.png",
+  "profilepic3.png",
+  "profilepic4.png",
+];
