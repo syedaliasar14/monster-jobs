@@ -2,9 +2,9 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { imageOptions } from "./enums";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { test64 } from "./test64";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { createPrompt, generateImageUrl } from "./utils";
 
 export default function ImageFormField({ form }: any) {
   const [isGenerated, setIsGenerated] = useState(false);
@@ -36,10 +36,11 @@ export default function ImageFormField({ form }: any) {
                 className="bg-indigo-500 hover:bg-indigo-600 w-[100px]"
                 type="button"
                 onClick={async () => {
-                  const newImage = 'data:image/jpeg;base64,' + test64 //await generateImageWithDalle(); // Call the API route
-                  setGeneratedImage(newImage)
-                  field.onChange(newImage); // Store the generated image in the form
                   setIsGenerated(true);
+                  const prompt = createPrompt(form.getValues());  // Create the prompt based on form values
+                  const imageUrl = await generateImageUrl(prompt); // Generate the image using the API route
+                  setGeneratedImage(imageUrl)
+                  field.onChange(imageUrl); // Store the generated image in the form
                 }}
               >Generate</Button>}
             {isGenerated && (
