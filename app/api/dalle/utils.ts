@@ -6,6 +6,6 @@ export async function generateImage(prompt: string) {
     },
     body: JSON.stringify({ prompt })
   })
-  const { imageUrl, imageBase64 } = await res.json()
+  const { imageBase64 } = await res.json()
   return imageBase64;
 }
