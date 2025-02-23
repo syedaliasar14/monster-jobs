@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { imageOptions } from "./enums";
 
 export const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }).max(100),
@@ -23,3 +24,15 @@ export function createPrompt(values: z.infer<typeof formSchema>) {
   return `A monster with ${hairColor} hair, ${skinColor} skin, ${numberOfEyes} eyes, ${numberOfArms} arms, ` +
     ` ${numberOfLegs} legs, ${skinTexture} skin texture, and ${features?.join(', ')}.`
 }
+
+export function getSrc(image: string | undefined) {
+    if (!image) {
+      return "/profilepic.png"
+    } else if (image.startsWith("data:image/")) {
+      return image  // base64 image
+    } else if (imageOptions.includes(image)){
+      return `/${image}`  //selected image
+    } else {
+      return image  //generated image
+    }
+  }

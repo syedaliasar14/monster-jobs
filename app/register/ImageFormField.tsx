@@ -4,13 +4,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { createPrompt } from "./utils";
-import { generateImageUrl } from "../api/dalle/utils";
+import { createPrompt, getSrc } from "./utils";
+import { generateImage } from "../api/dalle/utils";
 
 export default function ImageFormField({ form }: any) {
   const [isGenerated, setIsGenerated] = useState(false);
   const [generatedImage, setGeneratedImage] = useState('');
-  
+
   return (
     <FormField control={form.control} name="image" render={({ field }) => (
       <FormItem>
@@ -39,9 +39,9 @@ export default function ImageFormField({ form }: any) {
                 onClick={async () => {
                   setIsGenerated(true);
                   const prompt = createPrompt(form.getValues());  // Create the prompt based on form values
-                  const imageUrl = await generateImageUrl(prompt); // Generate the image using the API route
-                  setGeneratedImage(imageUrl)
-                  field.onChange(imageUrl); // Store the generated image in the form
+                  const image = await generateImage(prompt); // Generate the image using the API route
+                  setGeneratedImage(image)
+                  field.onChange(image); // Store the generated image in the form
                 }}
               >Generate</Button>}
             {isGenerated && (
@@ -49,7 +49,7 @@ export default function ImageFormField({ form }: any) {
               <Image
                 className={`cursor-pointer border-[3px] rounded-full bg-white ${field.value === generatedImage ? "border-indigo-500" : "border-transparent"}`}
                 onClick={() => field.onChange(generatedImage)}
-                src={generatedImage}
+                src={getSrc(generatedImage)}
                 alt="Generated image"
                 width={128}
                 height={128}

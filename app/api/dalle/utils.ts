@@ -1,4 +1,4 @@
-export async function generateImageUrl(prompt: string) {
+export async function generateImage(prompt: string) {
   const res = await fetch('/api/dalle', {
     method: 'POST',
     headers: {
@@ -6,6 +6,6 @@ export async function generateImageUrl(prompt: string) {
     },
     body: JSON.stringify({ prompt })
   })
-  const { imageUrl } = await res.json()
-  return imageUrl;
+  const { imageUrl, imageBase64 } = await res.json()
+  return imageBase64;
 }
